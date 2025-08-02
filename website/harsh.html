@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitizenReport - Report Local Issues</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CitizenReport</h1>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#report">Report Issue</a></li>
+                <li><a href="#track">Track Reports</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Empower Your Community</h2>
+                <p>Report local issues and track their resolution seamlessly</p>
+                <button class="cta-btn" onclick="showReportForm()">Report an Issue</button>
+            </div>
+        </section>
+
+        <!-- Report Form Section -->
+        <section id="report-section" class="section hidden">
+            <div class="container">
+                <h2>Report a Local Issue</h2>
+                <form id="report-form" class="report-form">
+                    <div class="form-group">
+                        <label for="issue-type">Issue Type:</label>
+                        <select id="issue-type" name="issueType" required>
+                            <option value="">Select Issue Type</option>
+                            <option value="road-damage">Road Damage</option>
+                            <option value="garbage">Garbage Collection</option>
+                            <option value="water-leak">Water Leak</option>
+                            <option value="streetlight">Street Light</option>
+                            <option value="drainage">Drainage</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" rows="4" 
+                                placeholder="Describe the issue in detail..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" 
+                               placeholder="Enter address or click on map" required>
+                        <div id="map" class="map-container"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photo">Upload Photo:</label>
+                        <input type="file" id="photo" name="photo" accept="image/*" multiple>
+                        <div id="photo-preview" class="photo-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reporter-name">Your Name:</label>
+                        <input type="text" id="reporter-name" name="reporterName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reporter-email">Your Email:</label>
+                        <input type="email" id="reporter-email" name="reporterEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reporter-phone">Phone Number:</label>
+                        <input type="tel" id="reporter-phone" name="reporterPhone">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Report</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Track Reports Section -->
+        <section id="track-section" class="section">
+            <div class="container">
+                <h2>Track Your Reports</h2>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Enter report ID or email">
+                    <button onclick="searchReports()">Search</button>
+                </div>
+                <div id="reports-list" class="reports-list"></div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="section">
+            <div class="container">
+                <h2>Community Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="total-reports">0</h3>
+                        <p>Total Reports</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="pending-reports">0</h3>
+                        <p>Pending</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="resolved-reports">0</h3>
+                        <p>Resolved</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="in-progress-reports">0</h3>
+                        <p>In Progress</p>
+                    </div>
+                </div>
+                <div id="recent-reports" class="recent-reports">
+                    <h3>Recent Reports</h3>
+                    <div id="recent-reports-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3>Report Submitted Successfully!</h3>
+            <p>Your report ID is: <span id="report-id"></span></p>
+            <p>You can use this ID to track your report status.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
